@@ -195,11 +195,18 @@ function getNutritionLinks() {
     var result = [],
         anchors = $('.btn.text-left');
 
-    for (var anchor of anchors) {
+    for (var i = 0; i < anchors.length; i++) {
+        var anchor = $(anchors[i]);
         if ($(anchor).attr('href').indexOf('traceDishes.htm?dishesIdMenu') > -1) {
             result.push($(anchor).attr('href'));
         }
-    }
+    }  
+
+    // for (var anchor of anchors) {
+    //     if ($(anchor).attr('href').indexOf('traceDishes.htm?dishesIdMenu') > -1) {
+    //         result.push($(anchor).attr('href'));
+    //     }
+    // }
 
     return result;
 }
