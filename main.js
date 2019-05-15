@@ -1,4 +1,4 @@
-const casper = require('casper').create({
+var casper = require('casper').create({
     waitTimeout: 5000, // 5s
     verbose: true,
     logLevel: 'error',
@@ -167,13 +167,13 @@ function resolvePreviewLinks() {
         return links;
     }
 
-    const start = new Date(start_month.split('-')[0], start_month.split('-')[1]),
+    var start = new Date(start_month.split('-')[0], start_month.split('-')[1]),
         end = new Date(end_month.split('-')[0], end_month.split('-')[1]);
 
     for (var m = start; m <= end; m.setMonth(m.getMonth() + 1)) {
-        var target_month = formatDate(m);
-        const year = target_month.split('-')[0],
-            month = target_month.split('-')[1] - 1,
+        var target_month = formatDate(m),
+            year = target_month.split('-')[0],
+            month = target_month.split('-')[1] - 2,
             firstDay = new Date(year, month, 1),
             lastDay = new Date(year, month + 1, 0),
             today = new Date();
@@ -181,6 +181,9 @@ function resolvePreviewLinks() {
         if (lastDay > today) {
             lastDay = today
         }
+
+        console.log('first day: ' + firstDay);
+        console.log('last day: ' + lastDay);
 
         for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
             preview_url = preview_url_placeholder.replace(new RegExp('{{time}}', 'g'), formatDate(d));
